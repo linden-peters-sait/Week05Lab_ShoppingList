@@ -71,7 +71,21 @@ public class ShoppingListServlet extends HttpServlet {
                     items.add(fldItem);
                     session.setAttribute("items", items);
                 }
-            } // Add actions here.
+            } else if (action.equals("delete")) {
+                String radSelect = request.getParameter("radSelect");
+                if (radSelect != null && !radSelect.equals("")) {
+                    try {
+                        int selected = Integer.parseInt(radSelect);
+                        ArrayList<String> items = (ArrayList<String>)session.getAttribute("items");
+                        if (items == null) // For safety.
+                            items = new ArrayList<String>();
+                        items.remove(selected);
+                        session.setAttribute("items",items);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
         response.sendRedirect("ShoppingList");
     }
