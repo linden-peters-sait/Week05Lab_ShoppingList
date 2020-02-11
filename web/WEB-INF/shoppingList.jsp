@@ -23,8 +23,12 @@
         </form>
         <form method="POST">
             <input type="hidden" name="action" value="delete" />
-            <input type="radio" name="radSelect" value="0" />apples<br />
-            <input type="submit" name="btnSubmit" value="Delete" />
+            <c:forEach var="item" items="${items}" varStatus="status">
+                <input type="radio" name="radSelect" value="${status.index}" />${item}<br />
+            </c:forEach>
+            <c:if test="${items.size() > 0}">
+                <input type="submit" name="btnSubmit" value="Delete" />
+            </c:if>
         </form>
     </body>
 </html>
